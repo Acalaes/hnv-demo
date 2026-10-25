@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.env
+.env.*
+.claude/settings.local.json
+logs/cena2/raw/
+logs/laco/raw/
+*.log

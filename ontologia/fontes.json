@@ -1,0 +1,240 @@
+{
+  "meta": {
+    "nome": "Ontologia mínima de fontes - nepotismo em cargo em comissão",
+    "versao": "0.1.0",
+    "dominio": "Direito Administrativo brasileiro - vedação ao nepotismo",
+    "conferido_em": "2026-10-25",
+    "metodo_conferencia": "Texto baixado das páginas oficiais (planalto.gov.br e portal.stf.jus.br) em 25/10/2026 e comparado literalmente com o campo 'texto'.",
+    "validado_por": "especialista (Alexandre Pinto Calaes, advogado)",
+    "status": "pendente de validação",
+    "observacao": "Só entra aqui fonte REAL conferida em sítio oficial. Ausência na ontologia não significa que a fonte não existe; significa que não foi validada pelo especialista e, por isso, o harness não a aceita."
+  },
+  "classes": {
+    "Norma": "Ato normativo (Constituição, lei, decreto).",
+    "Dispositivo": "Unidade citável de uma Norma (artigo, caput, inciso, parágrafo).",
+    "Sumula": "Enunciado de súmula de tribunal (inclui súmula vinculante).",
+    "Precedente": "Decisão judicial individual (ADC, RE etc.)."
+  },
+  "relacoes": {
+    "parteDe": "Dispositivo -> Norma (o dispositivo pertence à norma).",
+    "fundamenta": "Fonte A -> Fonte B (A serve de fundamento para B).",
+    "regulamenta": "Norma infralegal -> Norma/Dispositivo (detalha a aplicação)."
+  },
+  "instancias": [
+    {
+      "id": "CF88",
+      "classe": "Norma",
+      "rotulo": "Constituição da República Federativa do Brasil de 1988",
+      "citacao": "[CF/88]",
+      "chave": {"norma": "CF88"},
+      "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm",
+      "validado_por": "especialista (Alexandre Pinto Calaes, advogado)",
+      "status": "pendente de validação"
+    },
+    {
+      "id": "CF88_art37_caput",
+      "classe": "Dispositivo",
+      "rotulo": "CF/88, art. 37, caput",
+      "citacao": "[CF/88, art. 37, caput]",
+      "chave": {"norma": "CF88", "art": "37", "unidade": "caput"},
+      "parteDe": "CF88",
+      "texto": "A administração pública direta e indireta de qualquer dos Poderes da União, dos Estados, do Distrito Federal e dos Municípios obedecerá aos princípios de legalidade, impessoalidade, moralidade, publicidade e eficiência e, também, ao seguinte: (Redação dada pela Emenda Constitucional nº 19, de 1998)",
+      "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm#art37",
+      "validado_por": "especialista (Alexandre Pinto Calaes, advogado)",
+      "status": "pendente de validação"
+    },
+    {
+      "id": "CF88_art37_II",
+      "classe": "Dispositivo",
+      "rotulo": "CF/88, art. 37, II",
+      "citacao": "[CF/88, art. 37, II]",
+      "chave": {"norma": "CF88", "art": "37", "unidade": "II"},
+      "parteDe": "CF88",
+      "texto": "a investidura em cargo ou emprego público depende de aprovação prévia em concurso público de provas ou de provas e títulos, de acordo com a natureza e a complexidade do cargo ou emprego, na forma prevista em lei, ressalvadas as nomeações para cargo em comissão declarado em lei de livre nomeação e exoneração; (Redação dada pela Emenda Constitucional nº 19, de 1998)",
+      "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm#art37ii",
+      "validado_por": "especialista (Alexandre Pinto Calaes, advogado)",
+      "status": "pendente de validação"
+    },
+    {
+      "id": "CF88_art37_V",
+      "classe": "Dispositivo",
+      "rotulo": "CF/88, art. 37, V",
+      "citacao": "[CF/88, art. 37, V]",
+      "chave": {"norma": "CF88", "art": "37", "unidade": "V"},
+      "parteDe": "CF88",
+      "texto": "as funções de confiança, exercidas exclusivamente por servidores ocupantes de cargo efetivo, e os cargos em comissão, a serem preenchidos por servidores de carreira nos casos, condições e percentuais mínimos previstos em lei, destinam-se apenas às atribuições de direção, chefia e assessoramento; (Redação dada pela Emenda Constitucional nº 19, de 1998)",
+      "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm#art37v",
+      "validado_por": "especialista (Alexandre Pinto Calaes, advogado)",
+      "status": "pendente de validação"
+    },
+    {
+      "id": "CF88_art37_par4",
+      "classe": "Dispositivo",
+      "rotulo": "CF/88, art. 37, § 4º",
+      "citacao": "[CF/88, art. 37, § 4º]",
+      "chave": {"norma": "CF88", "art": "37", "unidade": "§4"},
+      "parteDe": "CF88",
+      "texto": "Os atos de improbidade administrativa importarão a suspensão dos direitos políticos, a perda da função pública, a indisponibilidade dos bens e o ressarcimento ao erário, na forma e gradação previstas em lei, sem prejuízo da ação penal cabível.",
+      "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm#art37%C2%A74",
+      "validado_por": "especialista (Alexandre Pinto Calaes, advogado)",
+      "status": "pendente de validação"
+    },
+    {
+      "id": "STF_SV13",
+      "classe": "Sumula",
+      "rotulo": "STF, Súmula Vinculante 13",
+      "citacao": "[STF, Súmula Vinculante 13]",
+      "chave": {"tribunal": "STF", "sumula": "13", "vinculante": true},
+      "texto": "A nomeação de cônjuge, companheiro ou parente em linha reta, colateral ou por afinidade, até o terceiro grau, inclusive, da autoridade nomeante ou de servidor da mesma pessoa jurídica investido em cargo de direção, chefia ou assessoramento, para o exercício de cargo em comissão ou de confiança ou, ainda, de função gratificada na administração pública direta e indireta em qualquer dos poderes da União, dos Estados, do Distrito Federal e dos Municípios, compreendido o ajuste mediante designações recíprocas, viola a Constituição Federal.",
+      "url": "https://portal.stf.jus.br/jurisprudencia/sumariosumulas.asp?base=26&sumula=1227",
+      "fundamentadaEm": ["CF88_art37_caput", "STF_ADC12", "STF_RE579951"],
+      "validado_por": "especialista (Alexandre Pinto Calaes, advogado)",
+      "status": "pendente de validação"
+    },
+    {
+      "id": "STF_ADC12",
+      "classe": "Precedente",
+      "rotulo": "STF, ADC 12",
+      "citacao": "[STF, ADC 12]",
+      "chave": {"tribunal": "STF", "classe_processual": "ADC", "numero": "12"},
+      "texto": "ADC 12, rel. min. Ayres Britto, Plenário, j. 20-8-2008, DJE 237 de 18-12-2008. Declarou a constitucionalidade da Resolução 7/2005 do CNJ (vedação ao nepotismo no Poder Judiciário). Precedente representativo da Súmula Vinculante 13.",
+      "url": "https://portal.stf.jus.br/jurisprudencia/sumariosumulas.asp?base=26&sumula=1227",
+      "fundamenta": ["STF_SV13"],
+      "validado_por": "especialista (Alexandre Pinto Calaes, advogado)",
+      "status": "pendente de validação"
+    },
+    {
+      "id": "STF_RE579951",
+      "classe": "Precedente",
+      "rotulo": "STF, RE 579.951 (Tema 66)",
+      "citacao": "[STF, RE 579.951]",
+      "aliases": ["[STF, RE 579.951 (Tema 66)]", "[STF, Tema 66]"],
+      "chave": {"tribunal": "STF", "classe_processual": "RE", "numero": "579951", "tema": "66"},
+      "texto": "RE 579.951, rel. min. Ricardo Lewandowski, Plenário, j. 20-8-2008, DJE 202 de 24-10-2008, Tema 66. Tese: A vedação ao nepotismo não exige a edição de lei formal para coibir a prática, dado que essa proibição decorre diretamente dos princípios contidos no art. 37, caput, da Constituição Federal.",
+      "url": "https://portal.stf.jus.br/jurisprudencia/sumariosumulas.asp?base=26&sumula=1227",
+      "fundamenta": ["STF_SV13"],
+      "fundamentadoEm": ["CF88_art37_caput"],
+      "validado_por": "especialista (Alexandre Pinto Calaes, advogado)",
+      "status": "pendente de validação"
+    },
+    {
+      "id": "LEI8429",
+      "classe": "Norma",
+      "rotulo": "Lei nº 8.429, de 2 de junho de 1992 (Lei de Improbidade Administrativa)",
+      "citacao": "[Lei 8.429/1992]",
+      "chave": {"norma": "LEI8429"},
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8429.htm",
+      "regulamenta": ["CF88_art37_par4"],
+      "validado_por": "especialista (Alexandre Pinto Calaes, advogado)",
+      "status": "pendente de validação"
+    },
+    {
+      "id": "LEI8429_art11_caput",
+      "classe": "Dispositivo",
+      "rotulo": "Lei 8.429/1992, art. 11, caput",
+      "citacao": "[Lei 8.429/1992, art. 11, caput]",
+      "chave": {"norma": "LEI8429", "art": "11", "unidade": "caput"},
+      "parteDe": "LEI8429",
+      "texto": "Constitui ato de improbidade administrativa que atenta contra os princípios da administração pública a ação ou omissão dolosa que viole os deveres de honestidade, de imparcialidade e de legalidade, caracterizada por uma das seguintes condutas: (Redação dada pela Lei nº 14.230, de 2021)",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8429.htm#art11",
+      "validado_por": "especialista (Alexandre Pinto Calaes, advogado)",
+      "status": "pendente de validação"
+    },
+    {
+      "id": "LEI8429_art11_XI",
+      "classe": "Dispositivo",
+      "rotulo": "Lei 8.429/1992, art. 11, XI",
+      "citacao": "[Lei 8.429/1992, art. 11, XI]",
+      "chave": {"norma": "LEI8429", "art": "11", "unidade": "XI"},
+      "parteDe": "LEI8429",
+      "texto": "nomear cônjuge, companheiro ou parente em linha reta, colateral ou por afinidade, até o terceiro grau, inclusive, da autoridade nomeante ou de servidor da mesma pessoa jurídica investido em cargo de direção, chefia ou assessoramento, para o exercício de cargo em comissão ou de confiança ou, ainda, de função gratificada na administração pública direta e indireta em qualquer dos Poderes da União, dos Estados, do Distrito Federal e dos Municípios, compreendido o ajuste mediante designações recíprocas; (Incluído pela Lei nº 14.230, de 2021)",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8429.htm#art11xi",
+      "fundamentadoEm": ["CF88_art37_par4", "STF_SV13"],
+      "validado_por": "especialista (Alexandre Pinto Calaes, advogado)",
+      "status": "pendente de validação"
+    },
+    {
+      "id": "DEC7203",
+      "classe": "Norma",
+      "rotulo": "Decreto nº 7.203, de 4 de junho de 2010 (vedação do nepotismo na administração pública federal)",
+      "citacao": "[Decreto 7.203/2010]",
+      "chave": {"norma": "DEC7203"},
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2010/decreto/d7203.htm",
+      "regulamenta": ["CF88_art37_caput", "STF_SV13"],
+      "validado_por": "especialista (Alexandre Pinto Calaes, advogado)",
+      "status": "pendente de validação"
+    },
+    {
+      "id": "DEC7203_art1",
+      "classe": "Dispositivo",
+      "rotulo": "Decreto 7.203/2010, art. 1º",
+      "citacao": "[Decreto 7.203/2010, art. 1º]",
+      "chave": {"norma": "DEC7203", "art": "1", "unidade": "caput"},
+      "parteDe": "DEC7203",
+      "texto": "A vedação do nepotismo no âmbito dos órgãos e entidades da administração pública federal direta e indireta observará o disposto neste Decreto.",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2010/decreto/d7203.htm#art1",
+      "validado_por": "especialista (Alexandre Pinto Calaes, advogado)",
+      "status": "pendente de validação"
+    },
+    {
+      "id": "DEC7203_art2_III",
+      "classe": "Dispositivo",
+      "rotulo": "Decreto 7.203/2010, art. 2º, III",
+      "citacao": "[Decreto 7.203/2010, art. 2º, III]",
+      "chave": {"norma": "DEC7203", "art": "2", "unidade": "III"},
+      "parteDe": "DEC7203",
+      "texto": "familiar: o cônjuge, o companheiro ou o parente em linha reta ou colateral, por consanguinidade ou afinidade, até o terceiro grau.",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2010/decreto/d7203.htm#art2",
+      "validado_por": "especialista (Alexandre Pinto Calaes, advogado)",
+      "status": "pendente de validação"
+    },
+    {
+      "id": "DEC7203_art3_caput",
+      "classe": "Dispositivo",
+      "rotulo": "Decreto 7.203/2010, art. 3º, caput",
+      "citacao": "[Decreto 7.203/2010, art. 3º, caput]",
+      "chave": {"norma": "DEC7203", "art": "3", "unidade": "caput"},
+      "parteDe": "DEC7203",
+      "texto": "No âmbito de cada órgão e de cada entidade, são vedadas as nomeações, contratações ou designações de familiar de Ministro de Estado, familiar da máxima autoridade administrativa correspondente ou, ainda, familiar de ocupante de cargo em comissão ou função de confiança de direção, chefia ou assessoramento, para:",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2010/decreto/d7203.htm#art3",
+      "validado_por": "especialista (Alexandre Pinto Calaes, advogado)",
+      "status": "pendente de validação"
+    },
+    {
+      "id": "DEC7203_art3_I",
+      "classe": "Dispositivo",
+      "rotulo": "Decreto 7.203/2010, art. 3º, I",
+      "citacao": "[Decreto 7.203/2010, art. 3º, I]",
+      "chave": {"norma": "DEC7203", "art": "3", "unidade": "I"},
+      "parteDe": "DEC7203",
+      "texto": "cargo em comissão ou função de confiança;",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2010/decreto/d7203.htm#art3",
+      "validado_por": "especialista (Alexandre Pinto Calaes, advogado)",
+      "status": "pendente de validação"
+    },
+    {
+      "id": "DEC7203_art3_par1",
+      "classe": "Dispositivo",
+      "rotulo": "Decreto 7.203/2010, art. 3º, § 1º",
+      "citacao": "[Decreto 7.203/2010, art. 3º, § 1º]",
+      "chave": {"norma": "DEC7203", "art": "3", "unidade": "§1"},
+      "parteDe": "DEC7203",
+      "texto": "Aplicam-se as vedações deste Decreto também quando existirem circunstâncias caracterizadoras de ajuste para burlar as restrições ao nepotismo, especialmente mediante nomeações ou designações recíprocas, envolvendo órgão ou entidade da administração pública federal.",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2010/decreto/d7203.htm#art3",
+      "validado_por": "especialista (Alexandre Pinto Calaes, advogado)",
+      "status": "pendente de validação"
+    },
+    {
+      "id": "DEC7203_art4_I",
+      "classe": "Dispositivo",
+      "rotulo": "Decreto 7.203/2010, art. 4º, I",
+      "citacao": "[Decreto 7.203/2010, art. 4º, I]",
+      "chave": {"norma": "DEC7203", "art": "4", "unidade": "I"},
+      "parteDe": "DEC7203",
+      "texto": "Não se incluem nas vedações deste Decreto as nomeações, designações ou contratações: I - de servidores federais ocupantes de cargo de provimento efetivo, bem como de empregados federais permanentes, inclusive aposentados, observada a compatibilidade do grau de escolaridade do cargo ou emprego de origem, ou a compatibilidade da atividade que lhe seja afeta e a complexidade inerente ao cargo em comissão ou função comissionada a ocupar, além da qualificação profissional do servidor ou empregado;",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2010/decreto/d7203.htm#art4",
+      "validado_por": "especialista (Alexandre Pinto Calaes, advogado)",
+      "status": "pendente de validação"
+    }
+  ]
+}
