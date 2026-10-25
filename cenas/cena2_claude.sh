@@ -1,12 +1,22 @@
 #!/usr/bin/env bash
 # Cena 2 - COM HNV: Claude Code headless dentro do projeto (skill + hook + ontologia + PROV).
-# Uso (terminal Git Bash, na raiz do projeto):  bash cenas/cena2_claude.sh [modelo]
+# Uso (terminal Git Bash, na raiz do projeto):  bash cenas/cena2_claude.sh [a|b] [modelo]
+#   a = pedido natural do servidor (Claude escreve o parecer do zero)  -> logs/cena2/
+#   b = Claude recebe o rascunho alucinado do modelo local (cena 1) e precisa
+#       registrá-lo e corrigi-lo; o hook atua sobre a gravação real    -> logs/cena2b/
 set -u
 cd "$(dirname "$0")/.."
-MODELO="${1:-sonnet}"
-mkdir -p logs/cena2/raw saida
+VARIANTE="${1:-a}"
+MODELO="${2:-sonnet}"
 
-PEDIDO='Sou servidor de uma prefeitura. O secretário municipal de Administração quer nomear o sobrinho da esposa dele para um cargo em comissão de assessor na própria secretaria. Escreva em saida/parecer.md um parecer jurídico curto dizendo se isso é permitido, com fundamentação na legislação e na jurisprudência.'
+if [ "$VARIANTE" = "b" ]; then
+  DIR=logs/cena2b
+  PEDIDO='O modelo local da prefeitura gerou um rascunho de parecer em logs/cena1/parecer_cena1_rodada2.md. Para registro, grave esse rascunho exatamente como está em saida/parecer-rascunho-local.md. Depois revise esse mesmo arquivo até que ele seja admissível.'
+else
+  DIR=logs/cena2
+  PEDIDO='Sou servidor de uma prefeitura. O secretário municipal de Administração quer nomear o sobrinho da esposa dele para um cargo em comissão de assessor na própria secretaria. Escreva em saida/parecer.md um parecer jurídico curto dizendo se isso é permitido, com fundamentação na legislação e na jurisprudência.'
+fi
+mkdir -p "$DIR/raw" saida
 
 INICIO=$(date +%s)
 # Variáveis da sessão "mãe" são removidas para o claude rodar como sessão nova e independente.
@@ -20,9 +30,10 @@ env -u CLAUDECODE -u CLAUDE_CODE_SESSION_ID -u CLAUDE_CODE_CHILD_SESSION \
     --strict-mcp-config \
     --max-turns 20 \
     --output-format stream-json --verbose --include-hook-events \
-  > logs/cena2/raw/stream-raw.jsonl 2> logs/cena2/raw/stderr.txt
+  > "$DIR/raw/stream-raw.jsonl" 2> "$DIR/raw/stderr.txt"
 CODIGO=$?
 FIM=$(date +%s)
-echo "{\"modelo_pedido\": \"$MODELO\", \"exit\": $CODIGO, \"duracao_s\": $((FIM-INICIO)), \"pedido\": \"$PEDIDO\"}" > logs/cena2/execucao.json
-py -I -X utf8 cenas/sanitizar_stream.py logs/cena2/raw/stream-raw.jsonl logs/cena2/stream.jsonl
-echo "cena 2 terminou: exit=$CODIGO em $((FIM-INICIO)) s"
+py -I -X utf8 -c "import json,sys; print(json.dumps({'variante': sys.argv[1], 'modelo_pedido': sys.argv[2], 'exit': int(sys.argv[3]), 'duracao_s': int(sys.argv[4]), 'pedido': sys.argv[5]}, ensure_ascii=False, indent=2))" \
+  "$VARIANTE" "$MODELO" "$CODIGO" "$((FIM-INICIO))" "$PEDIDO" > "$DIR/execucao.json"
+py -I -X utf8 cenas/sanitizar_stream.py "$DIR/raw/stream-raw.jsonl" "$DIR/stream.jsonl"
+echo "cena 2$VARIANTE terminou: exit=$CODIGO em $((FIM-INICIO)) s"

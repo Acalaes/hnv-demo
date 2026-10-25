@@ -1,0 +1,115 @@
+{
+  "prefix": {
+    "prov": "http://www.w3.org/ns/prov#",
+    "hnv": "https://github.com/Acalaes/hnv-demo#",
+    "foaf": "http://xmlns.com/foaf/0.1/"
+  },
+  "entity": {
+    "hnv:parecer-6a32a65e79cb": {
+      "prov:type": "hnv:Parecer",
+      "hnv:arquivo": "saida/parecer-rascunho-local.md",
+      "hnv:sha256": "6a32a65e79cb46968000d56dc64bbfce48b4d419f0f6834193310c7146c1f929",
+      "hnv:status": "bloqueado pelo harness"
+    },
+    "hnv:ontologia": {
+      "prov:type": "hnv:OntologiaDeFontes",
+      "hnv:arquivo": "ontologia/fontes.json",
+      "hnv:sha256": "5b1f9baf096ce1f4920086bf0c135f09a58e2f36678c96d91022423b48f92121",
+      "hnv:versao": "0.1.0",
+      "hnv:statusValidacao": "pendente de validação"
+    },
+    "hnv:relatorio-20261025T192654-721": {
+      "prov:type": "hnv:RelatorioDeVerificacao",
+      "hnv:citacoes": [
+        {
+          "trecho": "artigo 37, inciso XXXIII, da Constituição Federal",
+          "status": "bloqueado",
+          "resolvido_para": [],
+          "motivo": "art. 37, XXXIII de CF/88: dispositivo não consta na ontologia validada",
+          "classe": "Dispositivo",
+          "forma": "solta"
+        },
+        {
+          "trecho": "Decreto nº 4.653/2002",
+          "status": "bloqueado",
+          "resolvido_para": [],
+          "motivo": "\"Decreto nº 4.653/2002\" não consta na ontologia validada pelo especialista",
+          "classe": "Norma",
+          "forma": "solta"
+        }
+      ]
+    }
+  },
+  "activity": {
+    "hnv:geracao-6a32a65e79cb": {
+      "prov:type": "hnv:GeracaoDeTexto"
+    },
+    "hnv:verificacao-20261025T192654-721": {
+      "prov:type": "hnv:VerificacaoSimbolica",
+      "prov:startTime": "2026-10-25T19:26:54.703376-03:00",
+      "prov:endTime": "2026-10-25T19:26:54.721733-03:00",
+      "hnv:modo": "hook PostToolUse"
+    }
+  },
+  "agent": {
+    "hnv:modelo": {
+      "prov:type": "prov:SoftwareAgent",
+      "prov:label": "modelo do Claude Code (sessão 68ea8c1c)"
+    },
+    "hnv:harness": {
+      "prov:type": "prov:SoftwareAgent",
+      "prov:label": "HNV verificar_citacoes.py v0.1.0"
+    },
+    "hnv:especialista": {
+      "prov:type": "prov:Person",
+      "foaf:name": "Alexandre Pinto Calaes",
+      "hnv:papel": "advogado - define e valida a ontologia"
+    }
+  },
+  "wasGeneratedBy": {
+    "_:g1": {
+      "prov:entity": "hnv:parecer-6a32a65e79cb",
+      "prov:activity": "hnv:geracao-6a32a65e79cb"
+    },
+    "_:g2": {
+      "prov:entity": "hnv:relatorio-20261025T192654-721",
+      "prov:activity": "hnv:verificacao-20261025T192654-721"
+    }
+  },
+  "used": {
+    "_:u1": {
+      "prov:activity": "hnv:verificacao-20261025T192654-721",
+      "prov:entity": "hnv:parecer-6a32a65e79cb"
+    },
+    "_:u2": {
+      "prov:activity": "hnv:verificacao-20261025T192654-721",
+      "prov:entity": "hnv:ontologia"
+    }
+  },
+  "wasAssociatedWith": {
+    "_:a1": {
+      "prov:activity": "hnv:geracao-6a32a65e79cb",
+      "prov:agent": "hnv:modelo"
+    },
+    "_:a2": {
+      "prov:activity": "hnv:verificacao-20261025T192654-721",
+      "prov:agent": "hnv:harness"
+    }
+  },
+  "wasAttributedTo": {
+    "_:t1": {
+      "prov:entity": "hnv:ontologia",
+      "prov:agent": "hnv:especialista"
+    }
+  },
+  "wasDerivedFrom": {},
+  "hnv:formula": {
+    "evidencia": false,
+    "norma": false,
+    "rastreabilidade": false,
+    "admissibilidade": false,
+    "aprovacao_humana": false,
+    "liberacao": false,
+    "expressao": "Admissibilidade = Evidência ∧ Norma ∧ Rastreabilidade; Liberação = Admissibilidade ∧ Humano"
+  }
+}

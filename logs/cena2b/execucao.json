@@ -1,0 +1,7 @@
+{
+  "variante": "b",
+  "modelo_pedido": "sonnet",
+  "exit": 0,
+  "duracao_s": 33,
+  "pedido": "O modelo local da prefeitura gerou um rascunho de parecer em logs/cena1/parecer_cena1_rodada2.md. Para registro, grave esse rascunho exatamente como está em saida/parecer-rascunho-local.md. Depois revise esse mesmo arquivo até que ele seja admissível."
+}

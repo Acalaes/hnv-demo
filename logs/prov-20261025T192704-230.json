@@ -1,0 +1,251 @@
+{
+  "prefix": {
+    "prov": "http://www.w3.org/ns/prov#",
+    "hnv": "https://github.com/Acalaes/hnv-demo#",
+    "foaf": "http://xmlns.com/foaf/0.1/"
+  },
+  "entity": {
+    "hnv:parecer-59eacca6ff47": {
+      "prov:type": "hnv:Parecer",
+      "hnv:arquivo": "saida/parecer-rascunho-local.md",
+      "hnv:sha256": "59eacca6ff475396eeeab47306419fc04e2c5d4e3d6d14d27578f30e242b5b32",
+      "hnv:status": "aguardando aprovação humana"
+    },
+    "hnv:ontologia": {
+      "prov:type": "hnv:OntologiaDeFontes",
+      "hnv:arquivo": "ontologia/fontes.json",
+      "hnv:sha256": "5b1f9baf096ce1f4920086bf0c135f09a58e2f36678c96d91022423b48f92121",
+      "hnv:versao": "0.1.0",
+      "hnv:statusValidacao": "pendente de validação"
+    },
+    "hnv:relatorio-20261025T192704-230": {
+      "prov:type": "hnv:RelatorioDeVerificacao",
+      "hnv:citacoes": [
+        {
+          "trecho": "CF/88, art. 37, caput",
+          "status": "ok",
+          "resolvido_para": [
+            "CF88_art37_caput"
+          ],
+          "motivo": "citação padronizada encontrada na ontologia",
+          "forma": "padronizada"
+        },
+        {
+          "trecho": "CF/88, art. 37, V",
+          "status": "ok",
+          "resolvido_para": [
+            "CF88_art37_V"
+          ],
+          "motivo": "citação padronizada encontrada na ontologia",
+          "forma": "padronizada"
+        },
+        {
+          "trecho": "STF, Súmula Vinculante 13",
+          "status": "ok",
+          "resolvido_para": [
+            "STF_SV13"
+          ],
+          "motivo": "citação padronizada encontrada na ontologia",
+          "forma": "padronizada"
+        },
+        {
+          "trecho": "STF, RE 579.951",
+          "status": "ok",
+          "resolvido_para": [
+            "STF_RE579951"
+          ],
+          "motivo": "citação padronizada encontrada na ontologia",
+          "forma": "padronizada"
+        },
+        {
+          "trecho": "Lei 8.429/1992, art. 11, XI",
+          "status": "ok",
+          "resolvido_para": [
+            "LEI8429_art11_XI"
+          ],
+          "motivo": "citação padronizada encontrada na ontologia",
+          "forma": "padronizada"
+        },
+        {
+          "trecho": "CF/88, art. 37, § 4º",
+          "status": "ok",
+          "resolvido_para": [
+            "CF88_art37_par4"
+          ],
+          "motivo": "citação padronizada encontrada na ontologia",
+          "forma": "padronizada"
+        },
+        {
+          "trecho": "Decreto 7.203/2010, art. 2º, III",
+          "status": "ok",
+          "resolvido_para": [
+            "DEC7203_art2_III"
+          ],
+          "motivo": "citação padronizada encontrada na ontologia",
+          "forma": "padronizada"
+        },
+        {
+          "trecho": "STF, Súmula Vinculante 13",
+          "status": "ok",
+          "resolvido_para": [
+            "STF_SV13"
+          ],
+          "motivo": "citação padronizada encontrada na ontologia",
+          "forma": "padronizada"
+        },
+        {
+          "trecho": "Lei 8.429/1992, art. 11, XI",
+          "status": "ok",
+          "resolvido_para": [
+            "LEI8429_art11_XI"
+          ],
+          "motivo": "citação padronizada encontrada na ontologia",
+          "forma": "padronizada"
+        }
+      ]
+    },
+    "hnv:fonte/CF88_art37_V": {
+      "prov:type": "hnv:Dispositivo",
+      "prov:label": "CF/88, art. 37, V",
+      "prov:location": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm#art37v",
+      "hnv:statusValidacao": "pendente de validação"
+    },
+    "hnv:fonte/CF88_art37_caput": {
+      "prov:type": "hnv:Dispositivo",
+      "prov:label": "CF/88, art. 37, caput",
+      "prov:location": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm#art37",
+      "hnv:statusValidacao": "pendente de validação"
+    },
+    "hnv:fonte/CF88_art37_par4": {
+      "prov:type": "hnv:Dispositivo",
+      "prov:label": "CF/88, art. 37, § 4º",
+      "prov:location": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm#art37%C2%A74",
+      "hnv:statusValidacao": "pendente de validação"
+    },
+    "hnv:fonte/DEC7203_art2_III": {
+      "prov:type": "hnv:Dispositivo",
+      "prov:label": "Decreto 7.203/2010, art. 2º, III",
+      "prov:location": "https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2010/decreto/d7203.htm#art2",
+      "hnv:statusValidacao": "pendente de validação"
+    },
+    "hnv:fonte/LEI8429_art11_XI": {
+      "prov:type": "hnv:Dispositivo",
+      "prov:label": "Lei 8.429/1992, art. 11, XI",
+      "prov:location": "https://www.planalto.gov.br/ccivil_03/leis/l8429.htm#art11xi",
+      "hnv:statusValidacao": "pendente de validação"
+    },
+    "hnv:fonte/STF_RE579951": {
+      "prov:type": "hnv:Precedente",
+      "prov:label": "STF, RE 579.951 (Tema 66)",
+      "prov:location": "https://portal.stf.jus.br/jurisprudencia/sumariosumulas.asp?base=26&sumula=1227",
+      "hnv:statusValidacao": "pendente de validação"
+    },
+    "hnv:fonte/STF_SV13": {
+      "prov:type": "hnv:Sumula",
+      "prov:label": "STF, Súmula Vinculante 13",
+      "prov:location": "https://portal.stf.jus.br/jurisprudencia/sumariosumulas.asp?base=26&sumula=1227",
+      "hnv:statusValidacao": "pendente de validação"
+    }
+  },
+  "activity": {
+    "hnv:geracao-59eacca6ff47": {
+      "prov:type": "hnv:GeracaoDeTexto"
+    },
+    "hnv:verificacao-20261025T192704-230": {
+      "prov:type": "hnv:VerificacaoSimbolica",
+      "prov:startTime": "2026-10-25T19:27:04.213434-03:00",
+      "prov:endTime": "2026-10-25T19:27:04.230421-03:00",
+      "hnv:modo": "hook PostToolUse"
+    }
+  },
+  "agent": {
+    "hnv:modelo": {
+      "prov:type": "prov:SoftwareAgent",
+      "prov:label": "modelo do Claude Code (sessão 68ea8c1c)"
+    },
+    "hnv:harness": {
+      "prov:type": "prov:SoftwareAgent",
+      "prov:label": "HNV verificar_citacoes.py v0.1.0"
+    },
+    "hnv:especialista": {
+      "prov:type": "prov:Person",
+      "foaf:name": "Alexandre Pinto Calaes",
+      "hnv:papel": "advogado - define e valida a ontologia"
+    }
+  },
+  "wasGeneratedBy": {
+    "_:g1": {
+      "prov:entity": "hnv:parecer-59eacca6ff47",
+      "prov:activity": "hnv:geracao-59eacca6ff47"
+    },
+    "_:g2": {
+      "prov:entity": "hnv:relatorio-20261025T192704-230",
+      "prov:activity": "hnv:verificacao-20261025T192704-230"
+    }
+  },
+  "used": {
+    "_:u1": {
+      "prov:activity": "hnv:verificacao-20261025T192704-230",
+      "prov:entity": "hnv:parecer-59eacca6ff47"
+    },
+    "_:u2": {
+      "prov:activity": "hnv:verificacao-20261025T192704-230",
+      "prov:entity": "hnv:ontologia"
+    }
+  },
+  "wasAssociatedWith": {
+    "_:a1": {
+      "prov:activity": "hnv:geracao-59eacca6ff47",
+      "prov:agent": "hnv:modelo"
+    },
+    "_:a2": {
+      "prov:activity": "hnv:verificacao-20261025T192704-230",
+      "prov:agent": "hnv:harness"
+    }
+  },
+  "wasAttributedTo": {
+    "_:t1": {
+      "prov:entity": "hnv:ontologia",
+      "prov:agent": "hnv:especialista"
+    }
+  },
+  "wasDerivedFrom": {
+    "_:d1": {
+      "prov:generatedEntity": "hnv:parecer-59eacca6ff47",
+      "prov:usedEntity": "hnv:fonte/CF88_art37_V"
+    },
+    "_:d2": {
+      "prov:generatedEntity": "hnv:parecer-59eacca6ff47",
+      "prov:usedEntity": "hnv:fonte/CF88_art37_caput"
+    },
+    "_:d3": {
+      "prov:generatedEntity": "hnv:parecer-59eacca6ff47",
+      "prov:usedEntity": "hnv:fonte/CF88_art37_par4"
+    },
+    "_:d4": {
+      "prov:generatedEntity": "hnv:parecer-59eacca6ff47",
+      "prov:usedEntity": "hnv:fonte/DEC7203_art2_III"
+    },
+    "_:d5": {
+      "prov:generatedEntity": "hnv:parecer-59eacca6ff47",
+      "prov:usedEntity": "hnv:fonte/LEI8429_art11_XI"
+    },
+    "_:d6": {
+      "prov:generatedEntity": "hnv:parecer-59eacca6ff47",
+      "prov:usedEntity": "hnv:fonte/STF_RE579951"
+    },
+    "_:d7": {
+      "prov:generatedEntity": "hnv:parecer-59eacca6ff47",
+      "prov:usedEntity": "hnv:fonte/STF_SV13"
+    }
+  },
+  "hnv:formula": {
+    "evidencia": true,
+    "norma": true,
+    "rastreabilidade": true,
+    "admissibilidade": true,
+    "aprovacao_humana": false,
+    "liberacao": false,
+    "expressao": "Admissibilidade = Evidência ∧ Norma ∧ Rastreabilidade; Liberação = Admissibilidade ∧ Humano"
+  }
+}

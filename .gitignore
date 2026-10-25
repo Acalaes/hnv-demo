@@ -3,6 +3,6 @@ __pycache__/
 .env
 .env.*
 .claude/settings.local.json
-logs/cena2/raw/
-logs/laco/raw/
+logs/*/raw/
+
 *.log

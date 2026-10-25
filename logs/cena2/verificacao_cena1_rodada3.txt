@@ -1,0 +1,12 @@
+HNV · BLOQUEIO (regra dura) - parecer_cena1_rodada3.md não é admissível.
+Admissibilidade = Evidência ∧ Norma ∧ Rastreabilidade = F ∧ F ∧ F
+Citações bloqueadas (4):
+  1. "artigo 37, inciso XXI" -> art. 37, XXI de CF/88: dispositivo não consta na ontologia validada
+  2. "Lei nº 8.112/1990" -> "Lei nº 8.112/1990" não consta na ontologia validada pelo especialista
+  3. "artigo 37, inciso XXI" -> art. 37, XXI sem norma identificável (não rastreável) - use o formato padronizado, ex.: [CF/88, art. 37, caput]
+  4. "ADI 2.958" -> precedente ADI 2.958 não consta na ontologia validada pelo especialista
+Falta ao menos uma fonte normativa (Norma, Dispositivo ou Súmula) da ontologia.
+Fontes aceitas (use exatamente estes formatos): [CF/88, art. 37, caput]; [CF/88, art. 37, II]; [CF/88, art. 37, V]; [CF/88, art. 37, § 4º]; [STF, Súmula Vinculante 13]; [STF, ADC 12]; [STF, RE 579.951]; [Lei 8.429/1992, art. 11, caput]; [Lei 8.429/1992, art. 11, XI]; [Decreto 7.203/2010, art. 1º]; [Decreto 7.203/2010, art. 2º, III]; [Decreto 7.203/2010, art. 3º, caput]; [Decreto 7.203/2010, art. 3º, I]; [Decreto 7.203/2010, art. 3º, § 1º]; [Decreto 7.203/2010, art. 4º, I]
+Corrija o parecer: remova ou substitua cada citação bloqueada por uma fonte aceita. Não invente fontes. Se faltar base, diga isso no texto.
+Proveniência: logs/prov-20261025T192529-057.json
+exit=2
