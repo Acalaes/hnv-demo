@@ -1,0 +1,26 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "py -I -X utf8 \"$CLAUDE_PROJECT_DIR/harness/verificar_citacoes.py\" --hook",
+            "timeout": 60
+          }
+        ]
+      }
+    ]
+  },
+  "permissions": {
+    "deny": [
+      "Edit(harness/**)",
+      "Write(harness/**)",
+      "Edit(ontologia/**)",
+      "Write(ontologia/**)",
+      "Edit(.claude/settings.json)",
+      "Write(.claude/settings.json)"
+    ]
+  }
+}
