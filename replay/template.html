@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HNV Replay</title>
+<style>
+  :root {
+    --fundo: #0b1220; --painel: #0f172a; --borda: #1e293b; --texto: #e2e8f0; --suave: #94a3b8;
+    --apagado: #64748b; --ciano: #22d3ee; --ambar: #f59e0b; --ambar-bg: rgba(245, 158, 11, .12);
+    --ciano-bg: rgba(34, 211, 238, .10);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--fundo); color: var(--texto); }
+  body { display: flex; align-items: center; justify-content: center; overflow: hidden;
+         font-family: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif; }
+  .palco { position: relative; width: min(100vw, 177.78vh); aspect-ratio: 16 / 9; container-type: inline-size;
+           background: radial-gradient(120% 90% at 50% 0%, #10203a 0%, var(--fundo) 60%); overflow: hidden; }
+  .topo { position: absolute; inset: 0 0 auto 0; height: 7%; display: flex; align-items: center;
+          justify-content: space-between; padding: 0 2.2cqw; font-size: 1.15cqw; color: var(--suave); }
+  .topo b { color: var(--texto); font-weight: 600; letter-spacing: .02em; }
+  .topo b span { color: var(--ciano); }
+  .rotulo { border: 1px solid var(--borda); border-radius: 99px; padding: .25em .9em; font-size: .95cqw; color: var(--apagado); }
+  .janela { position: absolute; left: 2.2cqw; right: 2.2cqw; top: 7.5%; bottom: 17%;
+            background: var(--painel); border: 1px solid var(--borda); border-radius: .8cqw;
+            box-shadow: 0 1.5cqw 4cqw rgba(0, 0, 0, .45); display: flex; flex-direction: column; overflow: hidden; }
+  .barra { height: 2.6cqw; display: flex; align-items: center; gap: .55cqw; padding: 0 1cqw;
+           border-bottom: 1px solid var(--borda); font-size: .95cqw; color: var(--apagado); }
+  .barra i { width: .8cqw; height: .8cqw; border-radius: 50%; background: #334155; display: inline-block; }
+  .barra em { margin-left: .8cqw; font-style: normal; }
+  .term { flex: 1; overflow: hidden; padding: 1.1cqw 1.4cqw; font-family: "Cascadia Mono", Consolas, "SF Mono", ui-monospace, monospace;
+          font-size: 1.22cqw; line-height: 1.55; }
+  .l { white-space: pre-wrap; word-break: break-word; margin: 0; animation: surge .25s ease-out; }
+  @keyframes surge { from { opacity: 0; transform: translateY(.3cqw); } to { opacity: 1; transform: none; } }
+  .cmd { color: var(--texto); } .cmd::before { content: "$ "; color: var(--ciano); }
+  .out { color: #cbd5e1; } .dim { color: var(--apagado); } .json { color: var(--suave); }
+  .ok { color: var(--ciano); } .bloq { color: var(--ambar); }
+  .tool { color: var(--texto); } .alerta { color: #fde68a; background: var(--ambar-bg); border-left: .25cqw solid var(--ambar); padding-left: .6cqw; }
+  .cursor { display: inline-block; width: .6em; background: var(--ciano); animation: pisca 1s steps(1) infinite; }
+  @keyframes pisca { 50% { opacity: 0; } }
+  .legenda { position: absolute; left: 2.2cqw; right: 2.2cqw; bottom: 5.5%; height: 9%; display: flex; align-items: center;
+             gap: 1.2cqw; font-size: 1.75cqw; font-weight: 500; transition: opacity .3s; }
+  .tag { font-size: 1.15cqw; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; padding: .35em .9em;
+         border-radius: .4cqw; border: 1px solid currentColor; white-space: nowrap; color: var(--suave); }
+  .tag.ciano { color: var(--ciano); background: var(--ciano-bg); } .tag.ambar { color: var(--ambar); background: var(--ambar-bg); }
+  .cartao, .selo { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+                   text-align: center; padding: 0 8cqw; background: rgba(11, 18, 32, .92); opacity: 0; pointer-events: none; transition: opacity .45s; }
+  .cartao.on, .selo.on { opacity: 1; }
+  .cartao h1 { font-size: 3.3cqw; margin: 0 0 1.2cqw; font-weight: 650; letter-spacing: -.01em; }
+  .cartao p, .selo p { font-size: 1.5cqw; color: var(--suave); margin: 0; font-family: "Cascadia Mono", Consolas, ui-monospace, monospace; }
+  .selo div { font-size: 3cqw; font-weight: 700; color: var(--ciano); border: .25cqw solid var(--ciano); border-radius: 1cqw;
+              padding: 1.2cqw 3cqw; margin-bottom: 1.4cqw; background: var(--ciano-bg); }
+  .rodape { position: absolute; left: 0; right: 0; bottom: 0; height: 4.2%; display: flex; align-items: center; gap: 1cqw; padding: 0 2.2cqw; }
+  .progresso { flex: 1; height: .25cqw; background: var(--borda); border-radius: 99px; overflow: hidden; }
+  .progresso div { height: 100%; width: 0; background: var(--ciano); transition: width .3s linear; }
+  .rodape button { background: none; border: 1px solid var(--borda); color: var(--suave); border-radius: .4cqw;
+                   font-size: 1cqw; padding: .2em .7em; cursor: pointer; }
+  .rodape button:hover { color: var(--texto); border-color: var(--apagado); }
+  .rodape small { font-size: .9cqw; color: var(--apagado); min-width: 6em; text-align: right; }
+</style>
+</head>
+<body>
+<div class="palco" id="palco">
+  <div class="topo"><b>HNV <span>·</span> Harness Neurossimbólico Vertical</b><span class="rotulo">Demonstração ilustrativa · execução real</span></div>
+  <div class="janela">
+    <div class="barra"><i></i><i></i><i></i><em>hnv-demo — terminal (replay dos logs)</em></div>
+    <div class="term" id="term"></div>
+  </div>
+  <div class="legenda" id="legenda"></div>
+  <div class="cartao" id="cartao"><h1></h1><p></p></div>
+  <div class="selo" id="selo"><div></div><p></p></div>
+  <div class="rodape">
+    <button id="bPausa" title="Pausar / continuar (espaço)">pausar</button>
+    <button id="bReinicio" title="Reiniciar (R)">reiniciar</button>
+    <div class="progresso"><div id="barra"></div></div>
+    <small id="tempo">0 s</small>
+  </div>
+</div>
+<script>
+const DADOS = /*__DADOS__*/null;
+const $ = id => document.getElementById(id);
+const term = $("term"), leg = $("legenda"), cartao = $("cartao"), selo = $("selo");
+const params = new URLSearchParams(location.search);
+const vel = Math.max(0.25, Number(params.get("v")) || 1);      // ?v=2 -> 2x mais rápido
+let pularAte = 1000 * (Number(params.get("t")) || 0);           // ?t=40 -> começa no segundo 40
+let pausado = false, geracao = 0, decorrido = 0;
+const total = DADOS.eventos.reduce((s, e) => s + e.d + (e.k === "cmd" ? 40 * e.t.length : 0), 0);
+
+function esperar(ms, g) {
+  return new Promise(res => {
+    let resta = ms / vel;
+    if (decorrido + ms <= pularAte) { decorrido += ms; atualizar(); return res(g === geracao); }
+    const passo = () => {
+      if (g !== geracao) return res(false);
+      if (!pausado) { const d = Math.min(50, resta); resta -= d; decorrido += d * vel; atualizar(); }
+      if (resta <= 0) return res(true);
+      setTimeout(passo, 50);
+    };
+    passo();
+  });
+}
+function atualizar() {
+  $("barra").style.width = Math.min(100, 100 * decorrido / total) + "%";
+  $("tempo").textContent = Math.round(decorrido / 1000) + " / " + Math.round(total / 1000) + " s";
+}
+function linha(texto, classe) {
+  const p = document.createElement("p");
+  p.className = "l " + (classe || "out");
+  p.textContent = texto || " ";
+  term.appendChild(p);
+  term.scrollTop = term.scrollHeight;
+  return p;
+}
+async function digitar(texto, g) {
+  const p = linha("", "cmd"), cur = document.createElement("span");
+  cur.className = "cursor"; cur.textContent = " ";
+  for (let i = 1; i <= texto.length; i++) {
+    p.textContent = texto.slice(0, i); p.appendChild(cur);
+    if (!(await esperar(40, g))) return;
+  }
+  cur.remove();
+}
+async function tocar() {
+  const g = ++geracao; decorrido = 0;
+  term.innerHTML = ""; leg.innerHTML = ""; cartao.classList.remove("on"); selo.classList.remove("on");
+  for (const e of DADOS.eventos) {
+    if (!(await esperar(e.d, g))) return;
+    cartao.classList.remove("on"); selo.classList.remove("on");
+    switch (e.k) {
+      case "titulo": cartao.querySelector("h1").textContent = e.t; cartao.querySelector("p").textContent = e.sub || "";
+                     cartao.classList.add("on"); break;
+      case "selo": selo.querySelector("div").textContent = e.t; selo.querySelector("p").textContent = e.sub || "";
+                   selo.classList.add("on"); break;
+      case "limpar": term.innerHTML = ""; break;
+      case "cmd": await digitar(e.t, g); break;
+      case "linha": linha(e.t, e.c); break;
+      case "legenda": {
+        leg.innerHTML = "";
+        const t = document.createElement("span"); t.className = "tag " + (e.cor || ""); t.textContent = e.tag || "";
+        const s = document.createElement("span"); s.textContent = e.t;
+        leg.append(t, s); break;
+      }
+      case "fim": cartao.classList.add("on"); decorrido = total; atualizar(); break;
+    }
+  }
+}
+$("bPausa").onclick = () => { pausado = !pausado; $("bPausa").textContent = pausado ? "continuar" : "pausar"; };
+$("bReinicio").onclick = () => { pularAte = 0; pausado = false; $("bPausa").textContent = "pausar"; tocar(); };
+document.addEventListener("keydown", ev => {
+  if (ev.code === "Space") { ev.preventDefault(); $("bPausa").click(); }
+  if (ev.key === "r" || ev.key === "R") $("bReinicio").click();
+});
+tocar();
+</script>
+</body>
+</html>

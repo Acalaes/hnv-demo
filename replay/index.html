@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HNV Replay</title>
+<style>
+  :root {
+    --fundo: #0b1220; --painel: #0f172a; --borda: #1e293b; --texto: #e2e8f0; --suave: #94a3b8;
+    --apagado: #64748b; --ciano: #22d3ee; --ambar: #f59e0b; --ambar-bg: rgba(245, 158, 11, .12);
+    --ciano-bg: rgba(34, 211, 238, .10);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--fundo); color: var(--texto); }
+  body { display: flex; align-items: center; justify-content: center; overflow: hidden;
+         font-family: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif; }
+  .palco { position: relative; width: min(100vw, 177.78vh); aspect-ratio: 16 / 9; container-type: inline-size;
+           background: radial-gradient(120% 90% at 50% 0%, #10203a 0%, var(--fundo) 60%); overflow: hidden; }
+  .topo { position: absolute; inset: 0 0 auto 0; height: 7%; display: flex; align-items: center;
+          justify-content: space-between; padding: 0 2.2cqw; font-size: 1.15cqw; color: var(--suave); }
+  .topo b { color: var(--texto); font-weight: 600; letter-spacing: .02em; }
+  .topo b span { color: var(--ciano); }
+  .rotulo { border: 1px solid var(--borda); border-radius: 99px; padding: .25em .9em; font-size: .95cqw; color: var(--apagado); }
+  .janela { position: absolute; left: 2.2cqw; right: 2.2cqw; top: 7.5%; bottom: 17%;
+            background: var(--painel); border: 1px solid var(--borda); border-radius: .8cqw;
+            box-shadow: 0 1.5cqw 4cqw rgba(0, 0, 0, .45); display: flex; flex-direction: column; overflow: hidden; }
+  .barra { height: 2.6cqw; display: flex; align-items: center; gap: .55cqw; padding: 0 1cqw;
+           border-bottom: 1px solid var(--borda); font-size: .95cqw; color: var(--apagado); }
+  .barra i { width: .8cqw; height: .8cqw; border-radius: 50%; background: #334155; display: inline-block; }
+  .barra em { margin-left: .8cqw; font-style: normal; }
+  .term { flex: 1; overflow: hidden; padding: 1.1cqw 1.4cqw; font-family: "Cascadia Mono", Consolas, "SF Mono", ui-monospace, monospace;
+          font-size: 1.22cqw; line-height: 1.55; }
+  .l { white-space: pre-wrap; word-break: break-word; margin: 0; animation: surge .25s ease-out; }
+  @keyframes surge { from { opacity: 0; transform: translateY(.3cqw); } to { opacity: 1; transform: none; } }
+  .cmd { color: var(--texto); } .cmd::before { content: "$ "; color: var(--ciano); }
+  .out { color: #cbd5e1; } .dim { color: var(--apagado); } .json { color: var(--suave); }
+  .ok { color: var(--ciano); } .bloq { color: var(--ambar); }
+  .tool { color: var(--texto); } .alerta { color: #fde68a; background: var(--ambar-bg); border-left: .25cqw solid var(--ambar); padding-left: .6cqw; }
+  .cursor { display: inline-block; width: .6em; background: var(--ciano); animation: pisca 1s steps(1) infinite; }
+  @keyframes pisca { 50% { opacity: 0; } }
+  .legenda { position: absolute; left: 2.2cqw; right: 2.2cqw; bottom: 5.5%; height: 9%; display: flex; align-items: center;
+             gap: 1.2cqw; font-size: 1.75cqw; font-weight: 500; transition: opacity .3s; }
+  .tag { font-size: 1.15cqw; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; padding: .35em .9em;
+         border-radius: .4cqw; border: 1px solid currentColor; white-space: nowrap; color: var(--suave); }
+  .tag.ciano { color: var(--ciano); background: var(--ciano-bg); } .tag.ambar { color: var(--ambar); background: var(--ambar-bg); }
+  .cartao, .selo { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+                   text-align: center; padding: 0 8cqw; background: rgba(11, 18, 32, .92); opacity: 0; pointer-events: none; transition: opacity .45s; }
+  .cartao.on, .selo.on { opacity: 1; }
+  .cartao h1 { font-size: 3.3cqw; margin: 0 0 1.2cqw; font-weight: 650; letter-spacing: -.01em; }
+  .cartao p, .selo p { font-size: 1.5cqw; color: var(--suave); margin: 0; font-family: "Cascadia Mono", Consolas, ui-monospace, monospace; }
+  .selo div { font-size: 3cqw; font-weight: 700; color: var(--ciano); border: .25cqw solid var(--ciano); border-radius: 1cqw;
+              padding: 1.2cqw 3cqw; margin-bottom: 1.4cqw; background: var(--ciano-bg); }
+  .rodape { position: absolute; left: 0; right: 0; bottom: 0; height: 4.2%; display: flex; align-items: center; gap: 1cqw; padding: 0 2.2cqw; }
+  .progresso { flex: 1; height: .25cqw; background: var(--borda); border-radius: 99px; overflow: hidden; }
+  .progresso div { height: 100%; width: 0; background: var(--ciano); transition: width .3s linear; }
+  .rodape button { background: none; border: 1px solid var(--borda); color: var(--suave); border-radius: .4cqw;
+                   font-size: 1cqw; padding: .2em .7em; cursor: pointer; }
+  .rodape button:hover { color: var(--texto); border-color: var(--apagado); }
+  .rodape small { font-size: .9cqw; color: var(--apagado); min-width: 6em; text-align: right; }
+</style>
+</head>
+<body>
+<div class="palco" id="palco">
+  <div class="topo"><b>HNV <span>·</span> Harness Neurossimbólico Vertical</b><span class="rotulo">Demonstração ilustrativa · execução real</span></div>
+  <div class="janela">
+    <div class="barra"><i></i><i></i><i></i><em>hnv-demo — terminal (replay dos logs)</em></div>
+    <div class="term" id="term"></div>
+  </div>
+  <div class="legenda" id="legenda"></div>
+  <div class="cartao" id="cartao"><h1></h1><p></p></div>
+  <div class="selo" id="selo"><div></div><p></p></div>
+  <div class="rodape">
+    <button id="bPausa" title="Pausar / continuar (espaço)">pausar</button>
+    <button id="bReinicio" title="Reiniciar (R)">reiniciar</button>
+    <div class="progresso"><div id="barra"></div></div>
+    <small id="tempo">0 s</small>
+  </div>
+</div>
+<script>
+const DADOS = {"eventos": [{"d": 0, "k": "titulo", "t": "Harness Neurossimbólico Vertical (HNV)", "sub": "Admissibilidade = Evidência ∧ Norma ∧ Rastreabilidade  ·  Liberação = Admissibilidade ∧ Humano"}, {"d": 3737, "k": "limpar", "t": ""}, {"d": 0, "k": "titulo", "t": "Cena 1 · Sem harness", "sub": "Modelo local qwen2.5:3b (Ollama, CPU) · sem ontologia, sem hook"}, {"d": 2313, "k": "limpar", "t": ""}, {"d": 266, "k": "legenda", "t": "Pedido natural de um servidor público", "tag": "Pedido"}, {"d": 266, "k": "cmd", "t": "py cenas/cena1_sem_harness.py --modelo qwen2.5:3b --rodada 1"}, {"d": 800, "k": "linha", "t": "Pedido: Sou servidor de uma prefeitura. O secretário municipal de Administração quer nomear o sobrinho da esposa dele para um cargo em comissão de assessor na própria secretaria. Escreva um parecer jurídico curto dizendo se isso é permitido, com fundamentação na legislação e na jurisprudência.", "c": "dim"}, {"d": 622, "k": "linha", "t": "... gerando (107 s reais em CPU, 5.07 tokens/s - acelerado no replay)", "c": "dim"}, {"d": 800, "k": "linha", "t": "Parecer Jurídico", "c": "out"}, {"d": 800, "k": "linha", "t": "A respeito da nomeação do sobrinho da esposa do Secretário Municipal de Administração para um cargo em comissão de assessor na própria secretaria, apresentamos o seguinte parecer:", "c": "out"}, {"d": 1067, "k": "linha", "t": "Segundo o Artigo 37, inciso XXXIII, da Constituição Federal de 1988, é vedado ao servidor público dar nomeação, promoção ou qualquer outro benefício a seu cônjuge, companheiro, parente colateral até terceiro grau, ou seu cônjuge ou companheiro de parente colateral até terceiro grau, ou a parente em linha reta até segundo grau.", "c": "alerta"}, {"d": 711, "k": "linha", "t": "[...]", "c": "dim"}, {"d": 800, "k": "legenda", "t": "Alucinação: \"art. 37, inciso XXXIII, da Constituição Federal\" não existe - o art. 37 termina no inciso XXII", "tag": "Alucinação", "cor": "ambar"}, {"d": 2313, "k": "linha", "t": "checagem manual (planalto.gov.br): INEXISTENTE (alucinação)", "c": "bloq"}, {"d": 2135, "k": "linha", "t": "Nas 3 rodadas: Nas 3 rodadas, o modelo fez pelo menos 1 citação inexistente ou com conteúdo falso. Foram 2 inexistentes (art. 37, XXXIII, duas vezes) e 2 com atribuição falsa (Decreto 4.653; art. 37, XXI). Em nenhuma rodada ele citou a Súmula Vinculante 13, que é a fonte central do tema.", "c": "dim"}, {"d": 3203, "k": "limpar", "t": ""}, {"d": 0, "k": "titulo", "t": "Cena 2 · Com HNV", "sub": "Claude Code (claude-sonnet-5-5) + skill (guia macio) + hook (regra dura) + ontologia + PROV"}, {"d": 2313, "k": "limpar", "t": ""}, {"d": 266, "k": "legenda", "t": "2a · mesmo pedido, agora dentro do harness", "tag": "Harness"}, {"d": 266, "k": "cmd", "t": "claude -p \"Sou servidor de uma prefeitura. O secretário municipal de Administração quer nomear o so...\" --permission-mode acceptEdits"}, {"d": 444, "k": "linha", "t": "", "c": "dim"}, {"d": 800, "k": "linha", "t": "● Skill(parecer-administrativo)", "c": "tool"}, {"d": 800, "k": "linha", "t": "● Read(ontologia/fontes.json)", "c": "tool"}, {"d": 800, "k": "linha", "t": "● Write(saida/parecer.md)", "c": "tool"}, {"d": 622, "k": "linha", "t": "  ⎿ hook PostToolUse:Write → exit 0", "c": "dim"}, {"d": 444, "k": "linha", "t": "HNV · OK - parecer.md: 13 citação(ões) conferida(s) na ontologia.", "c": "ok"}, {"d": 444, "k": "linha", "t": "Admissibilidade = Evidência ∧ Norma ∧ Rastreabilidade = V ∧ V ∧ V", "c": "ok"}, {"d": 444, "k": "linha", "t": "Status: aguardando aprovação humana (Liberação = Admissibilidade ∧ Humano).", "c": "ok"}, {"d": 444, "k": "linha", "t": "Proveniência: logs/prov-20261025T192352-629.json", "c": "out"}, {"d": 622, "k": "legenda", "t": "Sem erro de citação: 13 citações conferidas na ontologia", "tag": "OK", "cor": "ciano"}, {"d": 2847, "k": "limpar", "t": ""}, {"d": 266, "k": "legenda", "t": "2b · o rascunho alucinado da cena 1 (rodada 2) entra no Claude Code", "tag": "Teste"}, {"d": 266, "k": "cmd", "t": "claude -p \"O modelo local da prefeitura gerou um rascunho de parecer em logs/cena1/parecer_cena1_rodada...\""}, {"d": 444, "k": "linha", "t": "", "c": "dim"}, {"d": 800, "k": "linha", "t": "● Read(logs/cena1/parecer_cena1_rodada2.md)", "c": "tool"}, {"d": 800, "k": "linha", "t": "● Skill(parecer-administrativo)", "c": "tool"}, {"d": 800, "k": "linha", "t": "● Read(ontologia/fontes.json)", "c": "tool"}, {"d": 800, "k": "linha", "t": "● Write(saida/parecer-rascunho-local.md)", "c": "tool"}, {"d": 622, "k": "linha", "t": "  ⎿ hook PostToolUse:Write → exit 2", "c": "bloq"}, {"d": 177, "k": "legenda", "t": "Bloqueio: a regra dura devolve o erro ao modelo (exit 2)", "tag": "Bloqueio", "cor": "ambar"}, {"d": 578, "k": "linha", "t": "HNV · BLOQUEIO (regra dura) - parecer-rascunho-local.md não é admissível.", "c": "bloq"}, {"d": 578, "k": "linha", "t": "Admissibilidade = Evidência ∧ Norma ∧ Rastreabilidade = F ∧ F ∧ F", "c": "out"}, {"d": 578, "k": "linha", "t": "Citações bloqueadas (2):", "c": "out"}, {"d": 578, "k": "linha", "t": "  1. \"artigo 37, inciso XXXIII, da Constituição Federal\" -> art. 37, XXXIII de CF/88: dispositivo não consta na ontologia validada", "c": "bloq"}, {"d": 578, "k": "linha", "t": "  2. \"Decreto nº 4.653/2002\" -> \"Decreto nº 4.653/2002\" não consta na ontologia validada pelo especialista", "c": "bloq"}, {"d": 578, "k": "linha", "t": "Falta ao menos uma fonte normativa (Norma, Dispositivo ou Súmula) da ontologia.", "c": "bloq"}, {"d": 578, "k": "linha", "t": "Fontes aceitas: 15 citações da ontologia, ex.: [STF, Súmula Vinculante 13]; [CF/88, art. 37, caput] ...", "c": "dim"}, {"d": 578, "k": "linha", "t": "Corrija o parecer: remova ou substitua cada citação bloqueada por uma fonte aceita. Não invente fontes. Se faltar base, diga isso no texto.", "c": "dim"}, {"d": 578, "k": "linha", "t": "Proveniência: logs/prov-20261025T192654-721.json", "c": "out"}, {"d": 1601, "k": "pausa", "t": ""}, {"d": 533, "k": "legenda", "t": "Correção: o modelo reescreve usando só fontes validadas", "tag": "Correção", "cor": "ciano"}, {"d": 800, "k": "linha", "t": "● Write(saida/parecer-rascunho-local.md)", "c": "tool"}, {"d": 622, "k": "linha", "t": "  ⎿ hook PostToolUse:Write → exit 0", "c": "dim"}, {"d": 444, "k": "linha", "t": "HNV · OK - parecer-rascunho-local.md: 9 citação(ões) conferida(s) na ontologia.", "c": "ok"}, {"d": 444, "k": "linha", "t": "Admissibilidade = Evidência ∧ Norma ∧ Rastreabilidade = V ∧ V ∧ V", "c": "ok"}, {"d": 444, "k": "linha", "t": "Status: aguardando aprovação humana (Liberação = Admissibilidade ∧ Humano).", "c": "ok"}, {"d": 444, "k": "linha", "t": "Proveniência: logs/prov-20261025T192704-230.json", "c": "out"}, {"d": 2135, "k": "limpar", "t": ""}, {"d": 0, "k": "legenda", "t": "Proveniência: cada parecer gera um log W3C PROV", "tag": "Proveniência", "cor": "ciano"}, {"d": 266, "k": "cmd", "t": "cat logs/prov-20261025T192704-230.json"}, {"d": 373, "k": "linha", "t": "{", "c": "json"}, {"d": 373, "k": "linha", "t": "  \"entity\": { \"parecer\": { \"arquivo\": \"saida/parecer-rascunho-local.md\", \"sha256\": \"59eacca6ff475396…\",", "c": "json"}, {"d": 373, "k": "linha", "t": "               \"status\": \"aguardando aprovação humana\" } },", "c": "ok"}, {"d": 373, "k": "linha", "t": "  \"agent\": { \"modelo\": \"modelo do Claude Code (sessão 68ea8c1c)\",", "c": "json"}, {"d": 373, "k": "linha", "t": "             \"harness\": \"HNV verificar_citacoes.py v0.1.0\",", "c": "json"}, {"d": 373, "k": "linha", "t": "             \"especialista\": \"Alexandre Pinto Calaes\" },", "c": "json"}, {"d": 373, "k": "linha", "t": "  \"wasDerivedFrom\": [CF88_art37_V, CF88_art37_caput, CF88_art37_par4, DEC7203_art2_III, … (7 fontes)],", "c": "json"}, {"d": 373, "k": "linha", "t": "  \"formula\": { \"evidencia\": true, \"norma\": true, \"rastreabilidade\": true,", "c": "ok"}, {"d": 373, "k": "linha", "t": "              \"admissibilidade\": true, \"aprovacao_humana\": false, \"liberacao\": false }", "c": "ok"}, {"d": 373, "k": "linha", "t": "}", "c": "json"}, {"d": 1334, "k": "selo", "t": "Aguardando aprovação humana", "sub": "Liberação = Admissibilidade ∧ Humano"}, {"d": 3737, "k": "limpar", "t": ""}, {"d": 0, "k": "titulo", "t": "Bônus · Laço local gerar → verificar → corrigir", "sub": "qwen2.5:3b via API do Ollama · máx. 3 rodadas"}, {"d": 2135, "k": "limpar", "t": ""}, {"d": 266, "k": "cmd", "t": "py harness/laco_local.py"}, {"d": 800, "k": "linha", "t": "rodada 1 · 82 s · exit 2 · 3 citação(ões) bloqueada(s)", "c": "bloq"}, {"d": 338, "k": "linha", "t": "  1. \"artigo 37, inciso XXXVII\" -> art. 37, XXXVII de CF/88: dispositivo não consta na ontologia validada", "c": "dim"}, {"d": 338, "k": "linha", "t": "  2. \"artigo 37, inciso XXXVIII\" -> art. 37, XXXVIII sem norma identificável (não rastreável) - use o formato padronizado, ex.: [CF/88, art. 37, caput]", "c": "dim"}, {"d": 338, "k": "linha", "t": "  3. \"Decreto-Lei nº 2.201/67\" -> \"Decreto-Lei nº 2.201/67\" não consta na ontologia validada pelo especialista", "c": "dim"}, {"d": 800, "k": "linha", "t": "rodada 2 · 202 s · exit 2 · 3 citação(ões) bloqueada(s)", "c": "bloq"}, {"d": 338, "k": "linha", "t": "  1. \"Decreto-Lei nº 2.201/67\" -> \"Decreto-Lei nº 2.201/67\" não consta na ontologia validada pelo especialista", "c": "dim"}, {"d": 338, "k": "linha", "t": "  2. \"Decreto-Lei nº 2.201/67\" -> \"Decreto-Lei nº 2.201/67\" não consta na ontologia validada pelo especialista", "c": "dim"}, {"d": 338, "k": "linha", "t": "  3. \"Resolução 7/2005\" -> \"Resolução 7/2005\" não consta na ontologia validada pelo especialista", "c": "dim"}, {"d": 800, "k": "linha", "t": "rodada 3 · 232 s · exit 2 · 1 citação(ões) bloqueada(s)", "c": "bloq"}, {"d": 338, "k": "linha", "t": "  1. \"Resolução 7/2005\" -> \"Resolução 7/2005\" não consta na ontologia validada pelo especialista", "c": "dim"}, {"d": 800, "k": "linha", "t": "Resultado: bloqueado após o limite de rodadas", "c": "bloq"}, {"d": 444, "k": "legenda", "t": "Modelo pequeno não convergiu em 3 rodadas: o harness não libera", "tag": "Bloqueio", "cor": "ambar"}, {"d": 3381, "k": "limpar", "t": ""}, {"d": 0, "k": "titulo", "t": "Skill orienta · Hook decide · Ontologia ancora · PROV registra · Humano libera", "sub": "Camada simbólica definida pelo especialista - execução real, logs no repositório"}, {"d": 4449, "k": "fim", "t": ""}], "fontes": ["logs/cena1/rodada1.json", "logs/cena1/parecer_cena1_rodada1.md", "logs/cena1/checagem_manual.json", "logs/cena2/stream.jsonl", "logs/cena2b/stream.jsonl", "logs/cena2b/execucao.json", "logs/prov-20261025T192704-230.json", "logs/laco/transcricao.json"], "escala": 0.89, "duracao_estimada_s": 87.3};
+const $ = id => document.getElementById(id);
+const term = $("term"), leg = $("legenda"), cartao = $("cartao"), selo = $("selo");
+const params = new URLSearchParams(location.search);
+const vel = Math.max(0.25, Number(params.get("v")) || 1);      // ?v=2 -> 2x mais rápido
+let pularAte = 1000 * (Number(params.get("t")) || 0);           // ?t=40 -> começa no segundo 40
+let pausado = false, geracao = 0, decorrido = 0;
+const total = DADOS.eventos.reduce((s, e) => s + e.d + (e.k === "cmd" ? 40 * e.t.length : 0), 0);
+
+function esperar(ms, g) {
+  return new Promise(res => {
+    let resta = ms / vel;
+    if (decorrido + ms <= pularAte) { decorrido += ms; atualizar(); return res(g === geracao); }
+    const passo = () => {
+      if (g !== geracao) return res(false);
+      if (!pausado) { const d = Math.min(50, resta); resta -= d; decorrido += d * vel; atualizar(); }
+      if (resta <= 0) return res(true);
+      setTimeout(passo, 50);
+    };
+    passo();
+  });
+}
+function atualizar() {
+  $("barra").style.width = Math.min(100, 100 * decorrido / total) + "%";
+  $("tempo").textContent = Math.round(decorrido / 1000) + " / " + Math.round(total / 1000) + " s";
+}
+function linha(texto, classe) {
+  const p = document.createElement("p");
+  p.className = "l " + (classe || "out");
+  p.textContent = texto || " ";
+  term.appendChild(p);
+  term.scrollTop = term.scrollHeight;
+  return p;
+}
+async function digitar(texto, g) {
+  const p = linha("", "cmd"), cur = document.createElement("span");
+  cur.className = "cursor"; cur.textContent = " ";
+  for (let i = 1; i <= texto.length; i++) {
+    p.textContent = texto.slice(0, i); p.appendChild(cur);
+    if (!(await esperar(40, g))) return;
+  }
+  cur.remove();
+}
+async function tocar() {
+  const g = ++geracao; decorrido = 0;
+  term.innerHTML = ""; leg.innerHTML = ""; cartao.classList.remove("on"); selo.classList.remove("on");
+  for (const e of DADOS.eventos) {
+    if (!(await esperar(e.d, g))) return;
+    cartao.classList.remove("on"); selo.classList.remove("on");
+    switch (e.k) {
+      case "titulo": cartao.querySelector("h1").textContent = e.t; cartao.querySelector("p").textContent = e.sub || "";
+                     cartao.classList.add("on"); break;
+      case "selo": selo.querySelector("div").textContent = e.t; selo.querySelector("p").textContent = e.sub || "";
+                   selo.classList.add("on"); break;
+      case "limpar": term.innerHTML = ""; break;
+      case "cmd": await digitar(e.t, g); break;
+      case "linha": linha(e.t, e.c); break;
+      case "legenda": {
+        leg.innerHTML = "";
+        const t = document.createElement("span"); t.className = "tag " + (e.cor || ""); t.textContent = e.tag || "";
+        const s = document.createElement("span"); s.textContent = e.t;
+        leg.append(t, s); break;
+      }
+      case "fim": cartao.classList.add("on"); decorrido = total; atualizar(); break;
+    }
+  }
+}
+$("bPausa").onclick = () => { pausado = !pausado; $("bPausa").textContent = pausado ? "continuar" : "pausar"; };
+$("bReinicio").onclick = () => { pularAte = 0; pausado = false; $("bPausa").textContent = "pausar"; tocar(); };
+document.addEventListener("keydown", ev => {
+  if (ev.code === "Space") { ev.preventDefault(); $("bPausa").click(); }
+  if (ev.key === "r" || ev.key === "R") $("bReinicio").click();
+});
+tocar();
+</script>
+</body>
+</html>
