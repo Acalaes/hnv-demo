@@ -1,0 +1,123 @@
+{
+  "prefix": {
+    "prov": "http://www.w3.org/ns/prov#",
+    "hnv": "https://github.com/Acalaes/hnv-demo#",
+    "foaf": "http://xmlns.com/foaf/0.1/"
+  },
+  "entity": {
+    "hnv:parecer-a53ba704e596": {
+      "prov:type": "hnv:Parecer",
+      "hnv:arquivo": "logs/laco/parecer_laco_rodada1.md",
+      "hnv:sha256": "a53ba704e596fa47c83f059521e19311c9631d59364b09449e6c2678ac28cd68",
+      "hnv:status": "bloqueado pelo harness"
+    },
+    "hnv:ontologia": {
+      "prov:type": "hnv:OntologiaDeFontes",
+      "hnv:arquivo": "ontologia/fontes.json",
+      "hnv:sha256": "5b1f9baf096ce1f4920086bf0c135f09a58e2f36678c96d91022423b48f92121",
+      "hnv:versao": "0.1.0",
+      "hnv:statusValidacao": "pendente de validação"
+    },
+    "hnv:relatorio-20261025T192722-403": {
+      "prov:type": "hnv:RelatorioDeVerificacao",
+      "hnv:citacoes": [
+        {
+          "trecho": "artigo 37, inciso XXXVII",
+          "status": "bloqueado",
+          "resolvido_para": [],
+          "motivo": "art. 37, XXXVII de CF/88: dispositivo não consta na ontologia validada",
+          "classe": "Dispositivo",
+          "forma": "solta"
+        },
+        {
+          "trecho": "artigo 37, inciso XXXVIII",
+          "status": "bloqueado",
+          "resolvido_para": [],
+          "motivo": "art. 37, XXXVIII sem norma identificável (não rastreável) - use o formato padronizado, ex.: [CF/88, art. 37, caput]",
+          "classe": "Dispositivo",
+          "forma": "solta"
+        },
+        {
+          "trecho": "Decreto-Lei nº 2.201/67",
+          "status": "bloqueado",
+          "resolvido_para": [],
+          "motivo": "\"Decreto-Lei nº 2.201/67\" não consta na ontologia validada pelo especialista",
+          "classe": "Norma",
+          "forma": "solta"
+        }
+      ]
+    }
+  },
+  "activity": {
+    "hnv:geracao-a53ba704e596": {
+      "prov:type": "hnv:GeracaoDeTexto"
+    },
+    "hnv:verificacao-20261025T192722-403": {
+      "prov:type": "hnv:VerificacaoSimbolica",
+      "prov:startTime": "2026-10-25T19:27:22.391395-03:00",
+      "prov:endTime": "2026-10-25T19:27:22.403922-03:00",
+      "hnv:modo": "linha de comando"
+    }
+  },
+  "agent": {
+    "hnv:modelo": {
+      "prov:type": "prov:SoftwareAgent",
+      "prov:label": "qwen2.5:3b (Ollama, laço local, rodada 1)"
+    },
+    "hnv:harness": {
+      "prov:type": "prov:SoftwareAgent",
+      "prov:label": "HNV verificar_citacoes.py v0.1.0"
+    },
+    "hnv:especialista": {
+      "prov:type": "prov:Person",
+      "foaf:name": "Alexandre Pinto Calaes",
+      "hnv:papel": "advogado - define e valida a ontologia"
+    }
+  },
+  "wasGeneratedBy": {
+    "_:g1": {
+      "prov:entity": "hnv:parecer-a53ba704e596",
+      "prov:activity": "hnv:geracao-a53ba704e596"
+    },
+    "_:g2": {
+      "prov:entity": "hnv:relatorio-20261025T192722-403",
+      "prov:activity": "hnv:verificacao-20261025T192722-403"
+    }
+  },
+  "used": {
+    "_:u1": {
+      "prov:activity": "hnv:verificacao-20261025T192722-403",
+      "prov:entity": "hnv:parecer-a53ba704e596"
+    },
+    "_:u2": {
+      "prov:activity": "hnv:verificacao-20261025T192722-403",
+      "prov:entity": "hnv:ontologia"
+    }
+  },
+  "wasAssociatedWith": {
+    "_:a1": {
+      "prov:activity": "hnv:geracao-a53ba704e596",
+      "prov:agent": "hnv:modelo"
+    },
+    "_:a2": {
+      "prov:activity": "hnv:verificacao-20261025T192722-403",
+      "prov:agent": "hnv:harness"
+    }
+  },
+  "wasAttributedTo": {
+    "_:t1": {
+      "prov:entity": "hnv:ontologia",
+      "prov:agent": "hnv:especialista"
+    }
+  },
+  "wasDerivedFrom": {},
+  "hnv:formula": {
+    "evidencia": false,
+    "norma": false,
+    "rastreabilidade": false,
+    "admissibilidade": false,
+    "aprovacao_humana": false,
+    "liberacao": false,
+    "expressao": "Admissibilidade = Evidência ∧ Norma ∧ Rastreabilidade; Liberação = Admissibilidade ∧ Humano"
+  }
+}

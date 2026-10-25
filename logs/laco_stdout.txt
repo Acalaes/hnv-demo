@@ -1,0 +1,33 @@
+--- rodada 1: exit 2 (82.5 s)
+HNV · BLOQUEIO (regra dura) - parecer_laco_rodada1.md não é admissível.
+Admissibilidade = Evidência ∧ Norma ∧ Rastreabilidade = F ∧ F ∧ F
+Citações bloqueadas (3):
+  1. "artigo 37, inciso XXXVII" -> art. 37, XXXVII de CF/88: dispositivo não consta na ontologia validada
+  2. "artigo 37, inciso XXXVIII" -> art. 37, XXXVIII sem norma identificável (não rastreável) - use o formato padronizado, ex.: [CF/88, art. 37, caput]
+  3. "Decreto-Lei nº 2.201/67" -> "Decreto-Lei nº 2.201/67" não consta na ontologia validada pelo especialista
+Falta ao menos uma fonte normativa (Norma, Dispositivo ou Súmula) da ontologia.
+Fontes aceitas (use exatamente estes formatos): [CF/88, art. 37, caput]; [CF/88, art. 37, II]; [CF/88, art. 37, V]; [CF/88, art. 37, § 4º]; [STF, Súmula Vinculante 13]; [STF, ADC 12]; [STF, RE 579.951]; [Lei 8.429/1992, art. 11, caput]; [Lei 8.429/1992, art. 11, XI]; [Decreto 7.203/2010, art. 1º]; [Decreto 7.203/2010, art. 2º, III]; [Decreto 7.203/2010, art. 3º, caput]; [Decreto 7.203/2010, art. 3º, I]; [Decreto 7.203/2010, art. 3º, § 1º]; [Decreto 7.203/2010, art. 4º, I]
+Corrija o parecer: remova ou substitua cada citação bloqueada por uma fonte aceita. Não invente fontes. Se faltar base, diga isso no texto.
+Proveniência: logs/prov-20261025T192722-403.json
+
+--- rodada 2: exit 2 (202.4 s)
+HNV · BLOQUEIO (regra dura) - parecer_laco_rodada2.md não é admissível.
+Admissibilidade = Evidência ∧ Norma ∧ Rastreabilidade = F ∧ V ∧ V
+Citações bloqueadas (3):
+  1. "Decreto-Lei nº 2.201/67" -> "Decreto-Lei nº 2.201/67" não consta na ontologia validada pelo especialista
+  2. "Decreto-Lei nº 2.201/67" -> "Decreto-Lei nº 2.201/67" não consta na ontologia validada pelo especialista
+  3. "Resolução 7/2005" -> "Resolução 7/2005" não consta na ontologia validada pelo especialista
+Fontes aceitas (use exatamente estes formatos): [CF/88, art. 37, caput]; [CF/88, art. 37, II]; [CF/88, art. 37, V]; [CF/88, art. 37, § 4º]; [STF, Súmula Vinculante 13]; [STF, ADC 12]; [STF, RE 579.951]; [Lei 8.429/1992, art. 11, caput]; [Lei 8.429/1992, art. 11, XI]; [Decreto 7.203/2010, art. 1º]; [Decreto 7.203/2010, art. 2º, III]; [Decreto 7.203/2010, art. 3º, caput]; [Decreto 7.203/2010, art. 3º, I]; [Decreto 7.203/2010, art. 3º, § 1º]; [Decreto 7.203/2010, art. 4º, I]
+Corrija o parecer: remova ou substitua cada citação bloqueada por uma fonte aceita. Não invente fontes. Se faltar base, diga isso no texto.
+Proveniência: logs/prov-20261025T193045-587.json
+
+--- rodada 3: exit 2 (231.5 s)
+HNV · BLOQUEIO (regra dura) - parecer_laco_rodada3.md não é admissível.
+Admissibilidade = Evidência ∧ Norma ∧ Rastreabilidade = F ∧ V ∧ V
+Citações bloqueadas (1):
+  1. "Resolução 7/2005" -> "Resolução 7/2005" não consta na ontologia validada pelo especialista
+Fontes aceitas (use exatamente estes formatos): [CF/88, art. 37, caput]; [CF/88, art. 37, II]; [CF/88, art. 37, V]; [CF/88, art. 37, § 4º]; [STF, Súmula Vinculante 13]; [STF, ADC 12]; [STF, RE 579.951]; [Lei 8.429/1992, art. 11, caput]; [Lei 8.429/1992, art. 11, XI]; [Decreto 7.203/2010, art. 1º]; [Decreto 7.203/2010, art. 2º, III]; [Decreto 7.203/2010, art. 3º, caput]; [Decreto 7.203/2010, art. 3º, I]; [Decreto 7.203/2010, art. 3º, § 1º]; [Decreto 7.203/2010, art. 4º, I]
+Corrija o parecer: remova ou substitua cada citação bloqueada por uma fonte aceita. Não invente fontes. Se faltar base, diga isso no texto.
+Proveniência: logs/prov-20261025T193437-699.json
+
+Resultado final: bloqueado após o limite de rodadas
