@@ -165,7 +165,17 @@ def unidade_de(m: re.Match) -> str | None:
 # ---------------------------------------------------------------- verificação
 
 
-def verificar_referencia(trecho: str, idx: Indice, contexto_depois: str = "") -> dict:
+def ultima_norma_em(trecho: str):
+    """Como resolver_norma_em, mas devolve a ÚLTIMA menção de norma do trecho."""
+    ultimo = None
+    for rx in (RE_CF, RE_NORMA_NUM, RE_NORMA_NOME):
+        for m in rx.finditer(trecho):
+            if ultimo is None or m.start() > ultimo:
+                ultimo = m.start()
+    return resolver_norma_em(trecho[ultimo:]) if ultimo is not None else (None, None)
+
+
+def verificar_referencia(trecho: str, idx: Indice, contexto_depois: str = "", contexto_antes: str = "") -> dict:
     """Resolve UMA referência (conteúdo de colchete ou trecho solto)."""
     r = {"trecho": trecho.strip(), "status": "bloqueado", "resolvido_para": [], "motivo": ""}
 
@@ -222,7 +232,16 @@ def verificar_referencia(trecho: str, idx: Indice, contexto_depois: str = "") ->
         uni = unidade_de(m)
         resto = trecho[m.end():] + " " + contexto_depois[:90]
         antes = trecho[:m.start()]
-        nid, nrot = resolver_norma_em(antes) if resolver_norma_em(antes)[1] else resolver_norma_em(resto)
+        # ordem: norma no próprio trecho antes do artigo > logo depois ("da Lei ...")
+        # > pouco antes ("A Constituição, em seu artigo ...") > mais adiante
+        nid, nrot = resolver_norma_em(antes)
+        if not nrot:
+            perto = (trecho[m.end():] + " " + contexto_depois)[:45]
+            nid, nrot = resolver_norma_em(perto)
+        if not nrot:
+            nid, nrot = ultima_norma_em(contexto_antes[-70:])
+        if not nrot:
+            nid, nrot = resolver_norma_em(resto)
         r["classe"] = "Dispositivo"
         rot_disp = f"art. {m.group(1)}" + (f", {uni}" if uni else "")
         if not nrot:
@@ -287,7 +306,8 @@ def extrair_e_verificar(texto: str, idx: Indice) -> list[dict]:
                 continue  # siglas ambíguas sem contexto judicial
             fim = m.end()
             ctx = solto[fim: fim + 120]
-            res = verificar_referencia(m.group(0), idx, contexto_depois=ctx)
+            res = verificar_referencia(m.group(0), idx, contexto_depois=ctx,
+                                       contexto_antes=solto[max(0, m.start() - 70): m.start()])
             # se o artigo puxou a norma do contexto, reserva também esse trecho
             if rx is RE_ARTIGO:
                 mn = re.match(r"[^.;\n]{0,90}?(?:" + RE_CF.pattern + r"|" + RE_NORMA_NUM.pattern + r"|" + RE_NORMA_NOME.pattern + r")", ctx, re.I)
