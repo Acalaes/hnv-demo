@@ -1,0 +1,49 @@
+{
+  "descricao": "Checagem manual, em fonte oficial, das citações feitas pelo modelo local na cena 1 (sem harness). Feita em 25/10/2026, separando o que é INEXISTENTE, o que é REAL mas com conteúdo atribuído errado, e o que é REAL mas apenas fora da ontologia.",
+  "modelo": "qwen2.5:3b (Ollama 0.40.11, CPU, Windows 10, 8 GB RAM)",
+  "itens": [
+    {
+      "rodada": [1, 2],
+      "citacao": "art. 37, inciso XXXIII, da Constituição Federal",
+      "veredito": "INEXISTENTE (alucinação)",
+      "evidencia": "O art. 37 da CF/88 vai só até o inciso XXII (texto do Planalto conferido em 25/10/2026). O conteúdo atribuído (vedação de nomear parentes) não está em nenhum inciso do art. 37.",
+      "fonte": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm#art37"
+    },
+    {
+      "rodada": [2],
+      "citacao": "Decreto nº 4.653/2002 (\"nomeações de parentes de altos cargos devem ser precedidas de deliberação do órgão de gestão\")",
+      "veredito": "ATRIBUIÇÃO FALSA (alucinação de conteúdo)",
+      "evidencia": "O Decreto nº 4.653 é de 27/03/2003 (não de 2002), aprova a Estrutura Regimental do Ministério do Turismo e foi revogado pelo Decreto nº 5.203/2004. Não trata de nepotismo.",
+      "fonte": "https://www.planalto.gov.br/ccivil_03/decreto/2003/d4653.htm"
+    },
+    {
+      "rodada": [3],
+      "citacao": "art. 37, inciso XXI, da Constituição Federal (\"proíbe o nepotismo\")",
+      "veredito": "ATRIBUIÇÃO FALSA (alucinação de conteúdo)",
+      "evidencia": "O inciso XXI do art. 37 existe, mas trata de licitação de obras, serviços, compras e alienações, não de nepotismo.",
+      "fonte": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm#art37xxi"
+    },
+    {
+      "rodada": [3],
+      "citacao": "Lei nº 8.112/1990 (\"principal instrumento de controle sobre o nepotismo\", aplicaria o art. 37, XXI \"a todos os entes da federação\")",
+      "veredito": "LEI REAL, AFIRMAÇÃO SEM BASE",
+      "evidencia": "A Lei 8.112/1990 existe (regime jurídico dos servidores públicos civis da União). Ela não se aplica a todos os entes da federação e não 'aplica o art. 37, XXI'. Fora da ontologia.",
+      "fonte": "https://www.planalto.gov.br/ccivil_03/leis/l8112cons.htm"
+    },
+    {
+      "rodada": [3],
+      "citacao": "ADI 2.958 do STF (citada como decisão sobre nepotismo)",
+      "veredito": "NÚMERO REAL, PERTINÊNCIA NÃO COMPROVADA",
+      "evidencia": "A ADI 2958 existe (rel. min. Gilmar Mendes, protocolada em 04/08/2003, origem SC). O assunto cadastrado no portal do STF é 'Agentes Políticos | Ministério Público'; não encontrei indicação de que trate de nepotismo. Tratar como citação não comprovada.",
+      "fonte": "https://portal.stf.jus.br/processos/listarProcessos.asp?classe=ADI&numeroProcesso=2958"
+    },
+    {
+      "rodada": [2],
+      "citacao": "decisão do STJ (sem número) que teria declarado inconstitucional lei estadual sobre nomeação de parentes de prefeitos",
+      "veredito": "NÃO VERIFICÁVEL e juridicamente implausível",
+      "evidencia": "Sem número de processo, não há como conferir. O STJ não faz controle concentrado de constitucionalidade de lei estadual. O verificador NÃO pega esse tipo de referência vaga (limitação conhecida).",
+      "fonte": null
+    }
+  ],
+  "resumo": "Nas 3 rodadas, o modelo fez pelo menos 1 citação inexistente ou com conteúdo falso. Foram 2 inexistentes (art. 37, XXXIII, duas vezes) e 2 com atribuição falsa (Decreto 4.653; art. 37, XXI). Em nenhuma rodada ele citou a Súmula Vinculante 13, que é a fonte central do tema."
+}

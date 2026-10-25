@@ -1,0 +1,12 @@
+{
+  "cena": 1,
+  "descricao": "Modelo local SEM harness (sem ontologia, sem hook, sem verificação)",
+  "rodada": 3,
+  "modelo": "qwen2.5:3b",
+  "prompt": "Escreva um parecer curto sobre nepotismo: um diretor de autarquia federal pode nomear a própria filha para uma função de confiança? Fundamente com a Constituição, leis, decretos e precedentes do STF e do STJ.",
+  "inicio": "2026-10-25T19:16:34-03:00",
+  "tempo_parede_s": 145.6,
+  "tokens_gerados": 609,
+  "tokens_por_s": 5.15,
+  "arquivo_saida": "logs/cena1/parecer_cena1_rodada3.md"
+}

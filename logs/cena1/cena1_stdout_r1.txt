@@ -1,0 +1,28 @@
+{
+  "cena": 1,
+  "descricao": "Modelo local SEM harness (sem ontologia, sem hook, sem verificação)",
+  "rodada": 1,
+  "modelo": "qwen2.5:3b",
+  "prompt": "Sou servidor de uma prefeitura. O secretário municipal de Administração quer nomear o sobrinho da esposa dele para um cargo em comissão de assessor na própria secretaria. Escreva um parecer jurídico curto dizendo se isso é permitido, com fundamentação na legislação e na jurisprudência.",
+  "inicio": "2026-10-25T19:12:59-03:00",
+  "tempo_parede_s": 107.2,
+  "tokens_gerados": 342,
+  "tokens_por_s": 5.07,
+  "arquivo_saida": "logs/cena1/parecer_cena1_rodada1.md"
+}
+------------------------------------------------------------
+Parecer Jurídico
+
+A respeito da nomeação do sobrinho da esposa do Secretário Municipal de Administração para um cargo em comissão de assessor na própria secretaria, apresentamos o seguinte parecer:
+
+Segundo o Artigo 37, inciso XXXIII, da Constituição Federal de 1988, é vedado ao servidor público dar nomeação, promoção ou qualquer outro benefício a seu cônjuge, companheiro, parente colateral até terceiro grau, ou seu cônjuge ou companheiro de parente colateral até terceiro grau, ou a parente em linha reta até segundo grau.
+
+Portanto, a nomeação do sobrinho da esposa do Secretário, que é primo de segundo grau, ao cargo que lhe é oferecido, é ilegal e não pode ser autorizada.
+
+Por último, deprecamos que tal nomeação possa ser considerada um ato de nepotismo, o que é de todo ilegal e incompatível com a legislação e princípios constitucionais.
+
+Em face dos princípios constitucionais de legalidade, impessoalidade, moralidade e publicidade, recomendamos que a nomeação mencionada seja anulada e que sejam adotadas medidas para que tal ato seja revogado.
+
+Além disso, recomendamos que a prefeitura adote um processo de nomeação de servidores que seja transparente, imparcial e que atenda às normas legais vigentes.
+
+Tucumã, [Data]

@@ -1,0 +1,12 @@
+{
+  "cena": 1,
+  "descricao": "Modelo local SEM harness (sem ontologia, sem hook, sem verificação)",
+  "rodada": 2,
+  "modelo": "qwen2.5:3b",
+  "prompt": "Preciso de um parecer jurídico breve, para um processo administrativo, sobre a nomeação do cunhado do prefeito para cargo em comissão de chefe de gabinete. Cite os dispositivos legais e as decisões dos tribunais que fundamentam a conclusão.",
+  "inicio": "2026-10-25T19:19:09-03:00",
+  "tempo_parede_s": 101.4,
+  "tokens_gerados": 493,
+  "tokens_por_s": 5.43,
+  "arquivo_saida": "logs/cena1/parecer_cena1_rodada2.md"
+}

@@ -1,0 +1,12 @@
+{
+  "cena": 1,
+  "descricao": "Modelo local SEM harness (sem ontologia, sem hook, sem verificação)",
+  "rodada": 1,
+  "modelo": "qwen2.5:3b",
+  "prompt": "Sou servidor de uma prefeitura. O secretário municipal de Administração quer nomear o sobrinho da esposa dele para um cargo em comissão de assessor na própria secretaria. Escreva um parecer jurídico curto dizendo se isso é permitido, com fundamentação na legislação e na jurisprudência.",
+  "inicio": "2026-10-25T19:12:59-03:00",
+  "tempo_parede_s": 107.2,
+  "tokens_gerados": 342,
+  "tokens_por_s": 5.07,
+  "arquivo_saida": "logs/cena1/parecer_cena1_rodada1.md"
+}
